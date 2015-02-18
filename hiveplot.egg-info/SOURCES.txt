@@ -1,0 +1,7 @@
+setup.cfg
+setup.py
+hiveplot.egg-info/PKG-INFO
+hiveplot.egg-info/SOURCES.txt
+hiveplot.egg-info/dependency_links.txt
+hiveplot.egg-info/requires.txt
+hiveplot.egg-info/top_level.txt

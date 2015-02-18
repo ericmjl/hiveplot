@@ -1,0 +1,26 @@
+Metadata-Version: 1.1
+Name: hiveplot
+Version: 0.1.0
+Summary: Hive Plots in Matplotlib.
+Home-page: https://github.com/ericmjl/hiveplot
+Author: Eric J. Ma
+Author-email: ericmajinglong@gmail.com
+License: MIT
+Description: # Introduction
+        
+        This is a module that will allow you to make hive plots from network data.
+        
+        
+Keywords: network analysis,hive plots,data visualization
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
