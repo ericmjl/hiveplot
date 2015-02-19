@@ -245,17 +245,17 @@ class HivePlot(object):
 			end_angle = end_angle - self.minor_angle()
 			start_angle = start_angle + self.minor_angle()
 
-		if end_group_idx < start_group_idx:
+		elif end_group_idx < start_group_idx:
 			start_angle = start_angle - self.minor_angle()
 			end_angle = end_angle + self.minor_angle()
 
-		if start_group_idx == 0 and end_group_idx == len(self.nodes.keys())-1:
-			start_angle = start_angle - self.minor_angle() * 2
-			end_angle = end_angle + self.minor_angle() * 2
+		elif start_group_idx == 0 and end_group_idx == len(self.nodes.keys())-1:
+			start_angle = start_angle - self.minor_angle()
+			end_angle = end_angle + self.minor_angle()
 
-		if start_group_idx == len(self.nodes.keys())-1 and end_group_idx == 0:
-			start_angle = start_angle + self.minor_angle() * 2
-			end_angle = end_angle - self.minor_angle() * 2
+		elif start_group_idx == len(self.nodes.keys())-1 and end_group_idx == 0:
+			start_angle = start_angle + self.minor_angle()
+			end_angle = end_angle - self.minor_angle()
 
 
 		return start_angle, end_angle

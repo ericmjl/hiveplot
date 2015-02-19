@@ -6,10 +6,9 @@ Home-page: https://github.com/ericmjl/hiveplot
 Author: Eric J. Ma
 Author-email: ericmajinglong@gmail.com
 License: MIT
-Description: # Introduction
+Description: This is a module that will allow you to easily make hive plots from network data.
         
-        This is a module that will allow you to easily make hive plots from network data.
-        
+        More information can be found at the Github repository.
 Keywords: network analysis,hive plots,data visualization
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
