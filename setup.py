@@ -11,7 +11,7 @@ setup(
     version='0.1.3.5',
 
     description='Hive Plots in Matplotlib.',
-    long_description='Utility class for easily making hive plots in Python.'
+    long_description='Utility class for easily making hive plots in Python.',
 
     # The project's main homepage.
     url='https://github.com/ericmjl/hiveplot',
