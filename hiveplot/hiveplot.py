@@ -242,20 +242,28 @@ class HivePlot(object):
 		end_group_idx = self.nodes.keys().index(end_group)
 
 		if start_group_idx < end_group_idx:
-			end_angle = end_angle - self.minor_angle()
-			start_angle = start_angle + self.minor_angle()
+			if has_edge_within_group(end_group):
+				end_angle = end_angle - self.minor_angle()
+			if has_edge_within_group(start_group):
+				start_angle = start_angle + self.minor_angle()
 
 		elif end_group_idx < start_group_idx:
-			start_angle = start_angle - self.minor_angle()
-			end_angle = end_angle + self.minor_angle()
+			if has_edge_within_group(start_group): 
+				start_angle = start_angle - self.minor_angle()
+			if has_edge_within_group(end_group):
+				end_angle = end_angle + self.minor_angle()
 
 		elif start_group_idx == 0 and end_group_idx == len(self.nodes.keys())-1:
-			start_angle = start_angle - self.minor_angle()
-			end_angle = end_angle + self.minor_angle()
+			if has_edge_within_group(start_group):
+				start_angle = start_angle - self.minor_angle()
+			if has_edge_within_group(end_group):
+				end_angle = end_angle + self.minor_angle()
 
 		elif start_group_idx == len(self.nodes.keys())-1 and end_group_idx == 0:
-			start_angle = start_angle + self.minor_angle()
-			end_angle = end_angle - self.minor_angle()
+			if has_edge_within_group(start_group):
+				start_angle = start_angle + self.minor_angle()
+			if has_edge_within_group(end_group):
+				end_angle = end_angle - self.minor_angle()
 
 
 		return start_angle, end_angle
