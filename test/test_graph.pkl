@@ -1,0 +1,4 @@
+Äcnetworkx.classes.digraph
+DiGraph
+q)Åq}q(Unodeq}q(Ua}qUgroupqKsUc}qhKsUb}q	hKsUe}q
+hKsUd}qhKsUg}qhKsUf}qhKsUh}qhKsuUgraphq}Usuccq}q(Ua}qUc}qsUc}qUe}qsUb}qUd}qsUe}Ud}Ug}Uf}qUg}qsUh}qUa}qsuUedgeqhUpredq}q(Ua}qUhhsUc}q UahsUb}Ue}q!UchsUd}q"UbhsUg}q#UfhsUf}Uh}uUadjq$hub.
