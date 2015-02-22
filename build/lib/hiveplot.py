@@ -48,8 +48,10 @@ class HivePlot(object):
 		self.internal_radius = scale ** 2
 		self.group_colormap = group_colormap #dictionary of group:color
 
-		self.major_angle = self.initialize_major_angle()
-		self.minor_angle = self.initialize_minor_angle()
+		self.major_angle = 0
+		self.initialize_major_angle()
+		self.minor_angle = 0
+		self.initialize_minor_angle()
 		
 
 	"""
@@ -147,7 +149,7 @@ class HivePlot(object):
 		"""
 		Computes the theta along which a group's nodes are aligned.
 		"""
-		return self.nodes.keys().index(group) * self.initialize_major_angle()
+		return self.nodes.keys().index(group) * self.major_angle
 		
 	def add_axes_and_nodes(self):
 		for i, (group, nodelist) in enumerate(self.nodes.items()):
@@ -155,11 +157,11 @@ class HivePlot(object):
 			rs = np.arange(self.internal_radius, self.internal_radius + self.scale * len(nodelist))
 
 			if self.has_edge_within_group(group):
-					theta = theta - self.minor_angle()
+					theta = theta - self.minor_angle
 					self.plot_axis(rs, theta)
 					self.plot_nodes(nodelist, theta, group)
 
-					theta = theta + 2 * self.minor_angle()
+					theta = theta + 2 * self.minor_angle
 					self.plot_axis(rs, theta)
 					self.plot_nodes(nodelist, theta, group)
 
