@@ -47,7 +47,9 @@ class HivePlot(object):
 		self.dot_radius = self.scale / float(4)
 		self.internal_radius = scale ** 2
 		self.group_colormap = group_colormap #dictionary of group:color
-		self.draw()
+
+		self.major_angle = self.initialize_major_angle()
+		self.minor_angle = self.initialize_minor_angle()
 		
 
 	"""
@@ -82,20 +84,29 @@ class HivePlot(object):
 		for u, v, d in self.edges:
 			yield (u, v)
 
-	def major_angle(self):
+	def initialize_major_angle(self):
 		"""
 		Computes the major angle: 2pi radians / number of groups.
 		"""
 		num_groups = len(self.nodes.keys())
-		return 2 * np.pi / num_groups
+		self.major_angle = 2 * np.pi / num_groups
 	
-	def minor_angle(self):
+	def initialize_minor_angle(self):
 		"""
 		Computes the minor angle: 2pi radians / 3 * number of groups.
 		"""
 		num_groups = len(self.nodes.keys())
 
-		return 2 * np.pi / (6 * num_groups)
+		self.minor_angle = 2 * np.pi / (6 * num_groups)
+
+	def set_minor_angle(self, angle):
+		"""
+		Sets the major angle of the hive plot. I have restricted this to be 
+		less than the major angle.
+		"""
+		assert angle < self.major_angle, "Minor angle cannot be greater than the major angle."
+
+		self.minor_angle = angle
 
 	def plot_radius(self):
 		"""
@@ -136,7 +147,7 @@ class HivePlot(object):
 		"""
 		Computes the theta along which a group's nodes are aligned.
 		"""
-		return self.nodes.keys().index(group) * self.major_angle()
+		return self.nodes.keys().index(group) * self.initialize_major_angle()
 		
 	def add_axes_and_nodes(self):
 		for i, (group, nodelist) in enumerate(self.nodes.items()):
@@ -243,27 +254,27 @@ class HivePlot(object):
 
 		if start_group_idx == 0 and end_group_idx == len(self.nodes.keys())-1:
 			if self.has_edge_within_group(start_group):
-				start_angle = start_angle - self.minor_angle()
+				start_angle = start_angle - self.minor_angle
 			if self.has_edge_within_group(end_group):
-				end_angle = end_angle + self.minor_angle()
+				end_angle = end_angle + self.minor_angle
 
 		elif start_group_idx == len(self.nodes.keys())-1 and end_group_idx == 0:
 			if self.has_edge_within_group(start_group):
-				start_angle = start_angle + self.minor_angle()
+				start_angle = start_angle + self.minor_angle
 			if self.has_edge_within_group(end_group):
-				end_angle = end_angle - self.minor_angle()
+				end_angle = end_angle - self.minor_angle
 
 		elif start_group_idx < end_group_idx:# and (start_group_idx != 0 and end_group_idx != len(self.nodes.keys())-1):
 			if self.has_edge_within_group(end_group):
-				end_angle = end_angle - self.minor_angle()
+				end_angle = end_angle - self.minor_angle
 			if self.has_edge_within_group(start_group):
-				start_angle = start_angle + self.minor_angle()
+				start_angle = start_angle + self.minor_angle
 
 		elif end_group_idx < start_group_idx:#  and (end_group_idx != 0 and start_group_idx != len(self.nodes.keys())-1):
 			if self.has_edge_within_group(start_group): 
-				start_angle = start_angle - self.minor_angle()
+				start_angle = start_angle - self.minor_angle
 			if self.has_edge_within_group(end_group):
-				end_angle = end_angle + self.minor_angle()		
+				end_angle = end_angle + self.minor_angle		
 
 		return start_angle, end_angle
 	def correct_angles(self, start_angle, end_angle):
@@ -278,8 +289,8 @@ class HivePlot(object):
 
 		# Case when start_angle == end_angle:
 		if start_angle == end_angle:
-			start_angle = start_angle - self.minor_angle()
-			end_angle = end_angle + self.minor_angle()
+			start_angle = start_angle - self.minor_angle
+			end_angle = end_angle + self.minor_angle
 			
 
 		return start_angle, end_angle
