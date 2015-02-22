@@ -31,5 +31,6 @@ Finally, you will need a color map for the nodes.
 Once all of this is setup, you can plot the Hive Plot!
 
     h = HivePlot(nodes, edges, cmap)
+    h.draw()
     
 All contributions to improve the package are welcome!
