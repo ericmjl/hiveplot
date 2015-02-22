@@ -7,7 +7,7 @@ Hive plots are non-trivial to create, but I have made this Python package to hel
 
 To start, I assume that you have some network data. In your network data, you will have nodes and edges.
 
-Firstly, decide how you will group your nodes. Hive plots work best with up to 3 groups. Secondly, decide how you will order your nodes along each group. A common ordering is by degree centrality. Together, you can put together the first parameter put into hiveplot, which is a dictionary of `{group:[list_of_nodes]}`.
+Firstly, decide how you will group your nodes. Hive plots work best with up to 3 groups. Secondly, decide how you will order your nodes along each group. A common ordering is by degree centrality, which is how hiveplot currently does it automatically. Together, you can put together the first parameter put into hiveplot, which is a dictionary of `{group:[list_of_nodes]}`.
 
 Example code:
 
