@@ -14,8 +14,9 @@ class HivePlot(object):
 			 	pre-specified order. One common grouping is by a node 
 			 	attribute and one possible ordering is by degree centrality.
 
-	- edges: 	a list of (u,v,d) tuples (in NetworkX style), where u and v
-			 	are the nodes to join, and d are the node attributes.
+	- edges: 	a dictionary of {group:edgelist}, where each edgelist is a 
+				list of (u,v,d) tuples (in NetworkX style), where u and v are 
+				the nodes to join, and d are the node attributes.
 
 	The user will have to pre-sort and pre-group the nodes, and pre-map
 	the edge color groupings. This code will determine the positioning
@@ -34,10 +35,10 @@ class HivePlot(object):
 		- 	Requires the duplication of an axis.
 	"""
 
-	def __init__(self, nodes, edges, group_colormap, is_directed=False, scale=10):
+	def __init__(self, nodes, edges, node_colormap, edge_colormap=None, is_directed=False, scale=10):
 		super(HivePlot, self).__init__()
-		self.nodes = nodes #dictionary of {group:[ordered_nodes]}
-		self.edges = edges #list of (u,v,d) tuples
+		self.nodes = nodes #dictionary of {group:[ordered_nodes] list}
+		self.edges = edges #dictionary of {group:[(u,v,d)] tuples list}
 		#simplified version of the edges:
 		self.is_directed = is_directed #boolean of whether graph is supposed 
 									   #to be directed or not
@@ -46,7 +47,8 @@ class HivePlot(object):
 		self.scale = scale
 		self.dot_radius = self.scale / float(4)
 		self.internal_radius = scale ** 2
-		self.group_colormap = group_colormap #dictionary of group:color
+		self.node_colormap = node_colormap #dictionary of node_group:color
+		self.edge_colormap = edge_colormap #dictionary of edge_group:color
 
 		self.major_angle = 0
 		self.initialize_major_angle()
@@ -83,8 +85,9 @@ class HivePlot(object):
 		end nodes. 
 	"""
 	def simplified_edges(self):
-		for u, v, d in self.edges:
-			yield (u, v)
+		for group, edgelist in self.edges.items():
+			for u,v,d in edgelist:
+				yield (u, v)
 
 	def initialize_major_angle(self):
 		"""
@@ -142,7 +145,7 @@ class HivePlot(object):
 		for i, node in enumerate(nodelist):
 			r = self.internal_radius + i * self.scale
 			x, y = get_cartesian(r, theta)
-			circle = plt.Circle(xy=(x,y), radius=self.dot_radius, color=self.group_colormap[group])
+			circle = plt.Circle(xy=(x,y), radius=self.dot_radius, color=self.node_colormap[group])
 			self.ax.add_patch(circle)
 
 	def group_theta(self, group):
@@ -170,7 +173,7 @@ class HivePlot(object):
 				self.plot_nodes(nodelist, theta, group)
 
 
-	def find_group_membership(self, node):
+	def find_node_group_membership(self, node):
 		"""
 		Identifies the group for which a node belongs to.
 		"""
@@ -182,7 +185,7 @@ class HivePlot(object):
 		"""
 		Finds the index of the node in the sorted list.
 		"""
-		group = self.find_group_membership(node)
+		group = self.find_node_group_membership(node)
 		return self.nodes[group].index(node)
 
 	def node_radius(self, node):
@@ -195,10 +198,10 @@ class HivePlot(object):
 		"""
 		Convenience function to find the node's theta angle.
 		"""
-		group = self.find_group_membership(node)
+		group = self.find_node_group_membership(node)
 		return self.group_theta(group)
 
-	def draw_edge(self, n1, n2, d):
+	def draw_edge(self, n1, n2, d, group):
 		start_radius = self.node_radius(n1)
 		start_theta = self.node_theta(n1)
 
@@ -227,12 +230,17 @@ class HivePlot(object):
 		codes = [Path.MOVETO, Path.CURVE4, Path.CURVE4, Path.CURVE4]
 
 		path = Path(verts, codes)
-		patch = patches.PathPatch(path, lw=1, facecolor='none', alpha=0.3)
+		if self.edge_colormap == None:
+			edgecolor = 'black'
+		else:
+			edgecolor = self.edge_colormap[group]
+		patch = patches.PathPatch(path, lw=1, facecolor='none', edgecolor=edgecolor, alpha=0.3)
 		self.ax.add_patch(patch)
 
 	def add_edges(self):
-		for u, v, d in self.edges:
-			self.draw_edge(u, v, d)
+		for group, edgelist in self.edges.items():
+			for (u, v, d) in edgelist:
+				self.draw_edge(u, v, d, group)
 
  	def draw(self):
 		self.ax.set_xlim(-self.plot_radius(), self.plot_radius())
@@ -248,8 +256,8 @@ class HivePlot(object):
 		This function adjusts the start and end angles to correct for 
 		duplicated axes.
 		"""
-		start_group = self.find_group_membership(start_node)
-		end_group = self.find_group_membership(end_node)
+		start_group = self.find_node_group_membership(start_node)
+		end_group = self.find_node_group_membership(end_node)
 
 		start_group_idx = self.nodes.keys().index(start_group)
 		end_group_idx = self.nodes.keys().index(end_group)
