@@ -17,20 +17,29 @@ Example code:
     nodes['group2'] = [n for n, d in G.nodes(data=True) if d == other_criteria()]
     nodes['group3'] = [n for n, d in G.nodes(data=True) if d == third_criteria()]
     
-Next, you will need your list of edges. Typically, you can just use the edge list from `G`.
+Next, you will need to group your edges. Do this in a similar fashion as nodes.
 
-    edges = [(u, v, d) for u, v, d in G.edges(data=True)]
+    edges = dict()
+    edges['group1'] = [(u,v,d) for u,v,d in G.edges(data=True) if d == some_criteria()]
+    ...
     
-Finally, you will need a color map for the nodes.
 
-    cmap = dict()
-    cmap['group1'] = 'green'
-    cmap['group2'] = 'red'
-    cmap['group3'] = 'blue'
+    
+Finally, you will need a color map for the nodes and edges respectively.
+
+    nodes_cmap = dict()
+    nodes_cmap['group1'] = 'green'
+    nodes_cmap['group2'] = 'red'
+    nodes_cmap['group3'] = 'blue'
+
+	edges_cmap = dict()
+	edges_cmap['group1'] = 'green'
+	...
+	
     
 Once all of this is setup, you can plot the Hive Plot!
 
-    h = HivePlot(nodes, edges, cmap)
+    h = HivePlot(nodes, edges, nodes_camp, edges_cmap)
     h.draw()
     
 All contributions to improve the package are welcome!
