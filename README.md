@@ -5,6 +5,8 @@ Hive Plots in using Python &amp; matplotlib!
 
 Hive Plots are used for visualizing large network data in a rational way. Hive Plots are non-trivial to create, but I have made this Python package to help boil it down to the essentials. 
 
+The original creator of Hive Plots is Martin Krzywinski of the BCGSC. His website is at: http://mkweb.bcgsc.ca
+
 An example graph is available in the `test` folder. Alternatively, you can view the IPython notebook online: http://nbviewer.ipython.org/github/ericmjl/hiveplot/blob/master/test/Tests.ipynb
 
 To start, I assume that you have some network data. In your network data, you will have nodes and edges.
@@ -44,6 +46,4 @@ Once all of this is setup, you can plot the Hive Plot!
     h = HivePlot(nodes, edges, nodes_camp, edges_cmap)
     h.draw()
     
-The original creator of Hive Plots is Martin Krzywinski of the BCGSC. His website is at: http://mkweb.bcgsc.ca
-
 All contributions to improve the package are welcome!
