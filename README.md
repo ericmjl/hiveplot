@@ -1,6 +1,8 @@
 # hiveplot
 Hive Plots in using Python &amp; matplotlib!
 
+pypi page: https://pypi.python.org/pypi/hiveplot
+
 # How to use hiveplot
 
 Hive Plots are used for visualizing large network data in a rational way. Hive Plots are non-trivial to create, but I have made this Python package to help boil it down to the essentials. 
