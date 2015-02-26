@@ -35,18 +35,26 @@ class HivePlot(object):
 		- 	Requires the duplication of an axis.
 	"""
 
-	def __init__(self, nodes, edges, node_colormap, edge_colormap=None, is_directed=False, scale=10):
+	def __init__(self, nodes, edges, node_colormap, linewidth=0.5, edge_colormap=None, is_directed=False, scale=10, ax=None, fig=None):
 		super(HivePlot, self).__init__()
 		self.nodes = nodes #dictionary of {group:[ordered_nodes] list}
 		self.edges = edges #dictionary of {group:[(u,v,d)] tuples list}
 		#simplified version of the edges:
 		self.is_directed = is_directed #boolean of whether graph is supposed 
 									   #to be directed or not
-		self.fig = plt.figure(figsize=(8,8))
-		self.ax = self.fig.add_subplot(111)
+		if fig == None:
+			self.fig = plt.figure(figsize=(8,8))
+		else:
+			self.fig = fig
+
+		if ax == None:
+			self.ax = self.fig.add_subplot(111)
+		else:
+			self.ax = ax
 		self.scale = scale
 		self.dot_radius = self.scale / float(4)
 		self.internal_radius = scale ** 2
+		self.linewidth = linewidth
 		self.node_colormap = node_colormap #dictionary of node_group:color
 		self.edge_colormap = edge_colormap #dictionary of edge_group:color
 
@@ -139,13 +147,13 @@ class HivePlot(object):
 
 	def plot_axis(self, rs, theta):
 		xs, ys = get_cartesian(rs, theta)
-		self.ax.plot(xs, ys, 'black')
+		self.ax.plot(xs, ys, 'black', alpha=0.3)
 
 	def plot_nodes(self, nodelist, theta, group):
 		for i, node in enumerate(nodelist):
 			r = self.internal_radius + i * self.scale
 			x, y = get_cartesian(r, theta)
-			circle = plt.Circle(xy=(x,y), radius=self.dot_radius, color=self.node_colormap[group])
+			circle = plt.Circle(xy=(x,y), radius=self.dot_radius, color=self.node_colormap[group], linewidth=0)
 			self.ax.add_patch(circle)
 
 	def group_theta(self, group):
@@ -165,11 +173,11 @@ class HivePlot(object):
 					self.plot_nodes(nodelist, theta, group)
 
 					theta = theta + 2 * self.minor_angle
-					self.plot_axis(rs, theta)
+					# self.plot_axis(rs, theta)
 					self.plot_nodes(nodelist, theta, group)
 
 			else:
-				self.plot_axis(rs, theta)
+				# self.plot_axis(rs, theta)
 				self.plot_nodes(nodelist, theta, group)
 
 
@@ -234,7 +242,7 @@ class HivePlot(object):
 			edgecolor = 'black'
 		else:
 			edgecolor = self.edge_colormap[group]
-		patch = patches.PathPatch(path, lw=1, facecolor='none', edgecolor=edgecolor, alpha=0.3)
+		patch = patches.PathPatch(path, lw=self.linewidth, facecolor='none', edgecolor=edgecolor, alpha=0.3)
 		self.ax.add_patch(patch)
 
 	def add_edges(self):
