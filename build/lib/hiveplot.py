@@ -169,7 +169,7 @@ class HivePlot(object):
 
 			if self.has_edge_within_group(group):
 					theta = theta - self.minor_angle
-					self.plot_axis(rs, theta)
+					# self.plot_axis(rs, theta)
 					self.plot_nodes(nodelist, theta, group)
 
 					theta = theta + 2 * self.minor_angle
@@ -219,6 +219,14 @@ class HivePlot(object):
 		start_theta, end_theta = self.correct_angles(start_theta, end_theta)
 		start_theta, end_theta = self.adjust_angles(n1, start_theta, n2, end_theta)
 
+		# delta_theta = np.tanh((end_radius/start_radius - np.cos(self.major_angle))/np.sin(self.major_angle))
+		# if start_theta > end_theta:
+		# 	delta_theta = self.major_angle - delta_theta
+		# 	middle_theta = start_theta - delta_theta
+		# else:
+		# 	middle_theta = start_theta + delta_theta
+
+		# middle_radius = start_radius / np.cos(delta_theta)
 
 		middle1_radius = np.min([start_radius, end_radius])
 		middle2_radius = np.max([start_radius, end_radius])
@@ -232,10 +240,15 @@ class HivePlot(object):
 		startx, starty = get_cartesian(start_radius, start_theta)
 		middle1x, middle1y = get_cartesian(middle1_radius, middle1_theta)
 		middle2x, middle2y = get_cartesian(middle2_radius, middle2_theta)
+		# middlex, middley = get_cartesian(middle_radius, middle_theta)
 		endx, endy = get_cartesian(end_radius, end_theta)
 
 		verts = [(startx, starty), (middle1x, middle1y), (middle2x, middle2y), (endx, endy)]
 		codes = [Path.MOVETO, Path.CURVE4, Path.CURVE4, Path.CURVE4]
+
+		# verts = [(startx, starty), (middlex, middley), (endx, endy)]
+		# codes = [Path.MOVETO, Path.CURVE4, Path.CURVE4]
+
 
 		path = Path(verts, codes)
 		if self.edge_colormap == None:

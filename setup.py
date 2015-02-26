@@ -2,7 +2,7 @@ from setuptools import setup  # Always prefer setuptools over distutils
 
 setup(name='hiveplot',
 	  long_description='A utility for making hive plots in matplotlib.',
-      version='0.1.6',
+      version='0.1.6.1',
       py_modules=['hiveplot'],
       url='https://github.com/ericmjl/hiveplot',
       author='Eric J. Ma',
