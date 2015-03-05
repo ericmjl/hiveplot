@@ -35,7 +35,7 @@ class HivePlot(object):
 		- 	Requires the duplication of an axis.
 	"""
 
-	def __init__(self, nodes, edges, node_colormap, linewidth=0.5, edge_colormap=None, is_directed=False, scale=10, ax=None, fig=None):
+	def __init__(self, nodes, edges, node_colormap, edge_colormap=None, linewidth=0.5, is_directed=False, scale=10, ax=None, fig=None):
 		super(HivePlot, self).__init__()
 		self.nodes = nodes #dictionary of {group:[ordered_nodes] list}
 		self.edges = edges #dictionary of {group:[(u,v,d)] tuples list}
@@ -285,34 +285,44 @@ class HivePlot(object):
 
 		if start_group_idx == 0 and end_group_idx == len(self.nodes.keys())-1:
 			if self.has_edge_within_group(start_group):
-				start_angle = start_angle - self.minor_angle
+				start_angle = self.correct_negative_angle(start_angle - self.minor_angle)
 			if self.has_edge_within_group(end_group):
-				end_angle = end_angle + self.minor_angle
+				end_angle = self.correct_negative_angle(end_angle + self.minor_angle)
 
 		elif start_group_idx == len(self.nodes.keys())-1 and end_group_idx == 0:
 			if self.has_edge_within_group(start_group):
-				start_angle = start_angle + self.minor_angle
+				start_angle = self.correct_negative_angle(start_angle + self.minor_angle)
 			if self.has_edge_within_group(end_group):
-				end_angle = end_angle - self.minor_angle
+				end_angle = self.correct_negative_angle(end_angle - self.minor_angle)
 
 		elif start_group_idx < end_group_idx:# and (start_group_idx != 0 and end_group_idx != len(self.nodes.keys())-1):
 			if self.has_edge_within_group(end_group):
-				end_angle = end_angle - self.minor_angle
+				end_angle = self.correct_negative_angle(end_angle - self.minor_angle)
 			if self.has_edge_within_group(start_group):
-				start_angle = start_angle + self.minor_angle
+				start_angle = self.correct_negative_angle(start_angle + self.minor_angle)
+
 
 		elif end_group_idx < start_group_idx:#  and (end_group_idx != 0 and start_group_idx != len(self.nodes.keys())-1):
 			if self.has_edge_within_group(start_group): 
-				start_angle = start_angle - self.minor_angle
+				start_angle = self.correct_negative_angle(start_angle - self.minor_angle)
 			if self.has_edge_within_group(end_group):
-				end_angle = end_angle + self.minor_angle		
+				end_angle = self.correct_negative_angle(end_angle + self.minor_angle)		
 
 		return start_angle, end_angle
+
+	def correct_negative_angle(self, angle):
+		if angle < 0:
+			angle = 2 * np.pi + angle
+		else:
+			pass
+
+		return angle
+
 	def correct_angles(self, start_angle, end_angle):
 		"""
 		This function corrects for the following problems in the edges:
 		"""
-		# Edges going the wrong direction.
+		# Edges going the anti-clockwise direction involves angle = 0.
 		if start_angle == 0 and (end_angle - start_angle > np.pi):
 			start_angle = np.pi * 2
 		if end_angle == 0 and (end_angle - start_angle < -np.pi):
@@ -323,6 +333,12 @@ class HivePlot(object):
 			start_angle = start_angle - self.minor_angle
 			end_angle = end_angle + self.minor_angle
 			
+		# # Case when end_angle < 0:
+		# if end_angle < 0:
+		# 	end_angle = 2 * np.pi + end_angle
+
+		# if start_angle < 0:
+		# 	start_angle = 2 * np.pi + start_angle
 
 		return start_angle, end_angle
 
