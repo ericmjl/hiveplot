@@ -3,6 +3,10 @@ Hive Plots in using Python &amp; matplotlib!
 
 pypi page: https://pypi.python.org/pypi/hiveplot
 
+# How to install hiveplot
+
+To install `hiveplot`, you need to have `matplotlib` installed - that's the only dependency required. If you are using `networkx` to create your graphs, you will need that as well.
+
 # How to use hiveplot
 
 Hive Plots are used for visualizing large network data in a rational way. Hive Plots are non-trivial to create, but I have made this Python package to help boil it down to the essentials. 
@@ -19,17 +23,27 @@ Example code:
 
     ## assume that you have a graph called G
     nodes = dict()
-    nodes['group1'] = [n for n, d in G.nodes(data=True) if d == some_criteria()]
-    nodes['group2'] = [n for n, d in G.nodes(data=True) if d == other_criteria()]
-    nodes['group3'] = [n for n, d in G.nodes(data=True) if d == third_criteria()]
-    
+    nodes['group1'] = [(n,d) for n, d in G.nodes(data=True) if d == some_criteria()]
+    nodes['group2'] = [(n,d) for n, d in G.nodes(data=True) if d == other_criteria()]
+    nodes['group3'] = [(n,d) for n, d in G.nodes(data=True) if d == third_criteria()]
+
+You may wish to sort your nodes by some criteria.
+
+    for group, nodelist in nodes.items():
+        nodes[group] = sorted(nodelist, key=keyfunc())
+        ...
+        
+Note: keyfunc() might work on the node attributes `d`.
+
+Finally, you will need to get just the node ids out.
+
+        nodes[group] = [n for n, d in nodes[group]]
+        
 Next, you will need to group your edges. Do this in a similar fashion as nodes.
 
     edges = dict()
     edges['group1'] = [(u,v,d) for u,v,d in G.edges(data=True) if d == some_criteria()]
     ...
-    
-
     
 Finally, you will need a color map for the nodes and edges respectively.
 
@@ -41,7 +55,6 @@ Finally, you will need a color map for the nodes and edges respectively.
 	edges_cmap = dict()
 	edges_cmap['group1'] = 'green'
 	...
-	
     
 Once all of this is setup, you can plot the Hive Plot!
 
