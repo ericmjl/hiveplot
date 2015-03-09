@@ -33,7 +33,7 @@ You may wish to sort your nodes by some criteria.
         nodes[group] = sorted(nodelist, key=keyfunc())
         ...
         
-Note: keyfunc() might work on the node attributes `d`.
+Note: `keyfunc()` might work on the node attributes `d`. That is why we included the `d` dictionary of attributes inside.
 
 Finally, you will need to get just the node ids out.
 
