@@ -62,3 +62,13 @@ Once all of this is setup, you can plot the Hive Plot!
     h.draw()
     
 All contributions to improve the package are welcome!
+
+# Change Log
+
+0.1.7.4:
+
+1. Fixed a bug that would cause drawing to not work on Python 3 `dict_key` objects do not have a `.index(item)` the way `lists` have. 
+
+0.1.7.1:
+
+1. Changed all tabs into four spaces.
