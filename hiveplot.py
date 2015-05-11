@@ -35,7 +35,8 @@ class HivePlot(object):
         -    Requires the duplication of an axis.
     """
 
-    def __init__(self, nodes, edges, node_colormap, edge_colormap=None, linewidth=0.5, is_directed=False, scale=10, ax=None, fig=None):
+    def __init__(self, nodes, edges, node_colormap, edge_colormap=None, \
+    	linewidth=0.5, is_directed=False, scale=10, ax=None, fig=None):
         super(HivePlot, self).__init__()
         self.nodes = nodes #dictionary of {group:[ordered_nodes] list}
         self.edges = edges #dictionary of {group:[(u,v,d)] tuples list}
@@ -46,7 +47,6 @@ class HivePlot(object):
             self.fig = plt.figure(figsize=(8,8))
         else:
             self.fig = fig
-
         if ax == None:
             self.ax = self.fig.add_subplot(111)
         else:
