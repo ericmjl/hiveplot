@@ -60,7 +60,7 @@ Once all of this is setup, you can plot the Hive Plot!
 
     h = HivePlot(nodes, edges, nodes_camp, edges_cmap)
     h.draw()
-    
+
 All contributions to improve the package are welcome!
 
 # Change Log
