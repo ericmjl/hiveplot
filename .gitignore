@@ -1,6 +1,3 @@
-# Jupyter notebooks
-**.ipynb_checkpoints/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -59,3 +56,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Ipython Notebook
+.ipynb_checkpoints
