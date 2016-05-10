@@ -1,2 +1,2 @@
-matplotlib >=1.4
+matplotlib
 pep8
