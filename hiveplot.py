@@ -41,9 +41,9 @@ class HivePlot(object):
         super(HivePlot, self).__init__()
         self.nodes = nodes  # dictionary of {group:[ordered_nodes] list}
         self.edges = edges  # dictionary of {group:[(u,v,d)] tuples list}
-        #simplified version of the edges:
-        self.is_directed = is_directed  # boolean of whether graph is supposed
-                                        # to be directed or not
+
+        # boolean of whether graph is supposed to be directed or not
+        self.is_directed = is_directed
         if fig is None:
             self.fig = plt.figure(figsize=(8, 8))
         else:
@@ -169,8 +169,7 @@ class HivePlot(object):
                 break
 
         return i * self.major_angle
-        # return self.nodes.keys().index(group) * self.major_angle
-        
+
     def add_axes_and_nodes(self):
         for i, (group, nodelist) in enumerate(self.nodes.items()):
             theta = self.group_theta(group)
@@ -223,15 +222,6 @@ class HivePlot(object):
         start_theta, end_theta = self.correct_angles(start_theta, end_theta)
         start_theta, end_theta = self.adjust_angles(n1, start_theta, n2,
                                                     end_theta)
-
-        # delta_theta = np.tanh((end_radius/start_radius - np.cos(self.major_angle))/np.sin(self.major_angle))
-        # if start_theta > end_theta:
-        #    delta_theta = self.major_angle - delta_theta
-        #    middle_theta = start_theta - delta_theta
-        # else:
-        #    middle_theta = start_theta + delta_theta
-
-        # middle_radius = start_radius / np.cos(delta_theta)
 
         middle1_radius = np.min([start_radius, end_radius])
         middle2_radius = np.max([start_radius, end_radius])
