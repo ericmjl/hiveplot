@@ -65,6 +65,10 @@ All contributions to improve the package are welcome!
 
 # Change Log
 
+0.1.8.2:
+
+1. Changed the setup script to use `MANIFEST.in`.
+
 0.1.7.4:
 
 1. Fixed a bug that would cause drawing to not work on Python 3 `dict_key` objects do not have a `.index(item)` the way `lists` have. 
