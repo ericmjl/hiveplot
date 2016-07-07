@@ -1,6 +1,6 @@
 # Python stuff
 *.egg-info
-buid/*
+build/*
 dist/*
 
 # Byte-compiled / optimized / DLL files
