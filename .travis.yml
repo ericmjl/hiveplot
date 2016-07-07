@@ -29,5 +29,5 @@ install:
 # command to run tests
 script: 
   - pycodestyle .
-  - pip uninstall hiveplot
+  - pip uninstall -y hiveplot
   - conda install -c hiveplot
