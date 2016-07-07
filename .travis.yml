@@ -26,8 +26,8 @@ install:
   - pip install -r requirements.txt
   - python setup.py install
 
-# command to run tests
 script: 
+  # Your test script goes here
   - pycodestyle .
   - pip uninstall -y hiveplot
   - conda install -c hiveplot
