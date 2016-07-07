@@ -1,6 +1,7 @@
 # Python stuff
 *.egg-info
 buid/*
+dist/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
