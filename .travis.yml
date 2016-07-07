@@ -1,12 +1,36 @@
 language: python
 python:
-  - "2.7"
+  # We don't actually use the Travis Python, but this keeps it organized. 
+  - "3.4"
   - "3.5"
+install:
+  # We do this conditionally because it saves us some downloading if the
+  # version is the same.
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
+    else
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+    fi
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
 
-# command to install dependencies
-install: 
+  # Useful for debugging any issues with conda
+  - conda info -a
+
+  # Install Python, py.text, and required packages.
+  - conda env create -f build-env.yml
+  - source activate build
   - pip install -r requirements.txt
-  - python setup.py develop
+
+script:
+  # Your test script goes here
+  # - py.test
+  - echo "hello!"
 # command to run tests
 script: 
   - pycodestyle
+  - pip uninstall hiveplot
+  - conda install -c hiveplot
