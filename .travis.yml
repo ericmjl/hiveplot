@@ -30,4 +30,4 @@ script:
   # Your test script goes here
   - pycodestyle .
   - pip uninstall -y hiveplot
-  - conda install -c hiveplot
+  - conda install -c ericmjl hiveplot
