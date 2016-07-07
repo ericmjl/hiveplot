@@ -24,6 +24,7 @@ install:
   - conda env create -f build-env.yml
   - source activate build
   - pip install -r requirements.txt
+  - python setup.py install
 
 # command to run tests
 script: 
