@@ -9,4 +9,4 @@ install:
   - python setup.py develop
 # command to run tests
 script: 
-  - pep8
+  - pycodestyle
