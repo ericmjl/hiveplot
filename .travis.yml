@@ -25,10 +25,6 @@ install:
   - source activate build
   - pip install -r requirements.txt
 
-script:
-  # Your test script goes here
-  # - py.test
-  - echo "hello!"
 # command to run tests
 script: 
   - pycodestyle
