@@ -1,2 +1,2 @@
 matplotlib
-pep8
+pycodestyle
