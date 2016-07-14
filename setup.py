@@ -6,15 +6,17 @@ reqs = [str(ir.req) for ir in install_reqs]
 
 print(reqs)
 
+packages = ['hiveplot']
+
 setup(name='hiveplot',
-      version='0.1.8.3',
+      version='0.1.8.4',
       author='Eric J. Ma',
       author_email='ericmajinglong@gmail.com',
       description=("Hive plots in Python!"),
       license="MIT",
       keywords="network visualization, matplotlib, hiveplot",
       url='https://github.com/ericmjl/hiveplot',
-      py_modules=['hiveplot'],
+      packages=packages,
       maintainer='Eric J. Ma',
       maintainer_email='ericmajinglong@gmail.com',
       install_requires=reqs,
