@@ -7,7 +7,7 @@ reqs = [str(ir.req) for ir in install_reqs]
 print(reqs)
 
 setup(name='hiveplot',
-      version='0.1.8.2',
+      version='0.1.8.3',
       author='Eric J. Ma',
       author_email='ericmajinglong@gmail.com',
       description=("Hive plots in Python!"),
