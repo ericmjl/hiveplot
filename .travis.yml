@@ -29,5 +29,5 @@ install:
 script: 
   # Your test script goes here
   - pycodestyle .
+  - py.test
   - pip uninstall -y hiveplot
-  - conda install -c ericmjl hiveplot
