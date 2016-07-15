@@ -94,6 +94,10 @@ class HivePlot(object):
     """
 
     def simplified_edges(self):
+        """
+        A generator for getting all of the edges without consuming extra
+        memory.
+        """
         for group, edgelist in self.edges.items():
             for u, v, d in edgelist:
                 yield (u, v)
@@ -141,6 +145,9 @@ class HivePlot(object):
         return len(self.nodes[group])
 
     def has_edge_within_group(self, group):
+        """
+        Checks whether there are within-group edges or not.
+        """
         assert group in self.nodes.keys(),\
             "{0} not one of the group of nodes".format(group)
         nodelist = self.nodes[group]
@@ -149,10 +156,16 @@ class HivePlot(object):
                 return True
 
     def plot_axis(self, rs, theta):
+        """
+        Renders the axis.
+        """
         xs, ys = get_cartesian(rs, theta)
         self.ax.plot(xs, ys, 'black', alpha=0.3)
 
     def plot_nodes(self, nodelist, theta, group):
+        """
+        Plots nodes to screen.
+        """
         for i, node in enumerate(nodelist):
             r = self.internal_radius + i * self.scale
             x, y = get_cartesian(r, theta)
@@ -171,6 +184,10 @@ class HivePlot(object):
         return i * self.major_angle
 
     def add_axes_and_nodes(self):
+        """
+        Adds the axes (i.e. 2 or 3 axes, not to be confused with matplotlib 
+        axes) and the nodes that belong to each axis.
+        """
         for i, (group, nodelist) in enumerate(self.nodes.items()):
             theta = self.group_theta(group)
 
@@ -257,11 +274,17 @@ class HivePlot(object):
         self.ax.add_patch(patch)
 
     def add_edges(self):
+        """
+        Draws all of the edges in the graph.
+        """
         for group, edgelist in self.edges.items():
             for (u, v, d) in edgelist:
                 self.draw_edge(u, v, d, group)
 
     def draw(self):
+        """
+        The master function that is called that draws everything.
+        """
         self.ax.set_xlim(-self.plot_radius(), self.plot_radius())
         self.ax.set_ylim(-self.plot_radius(), self.plot_radius())
 
@@ -336,6 +359,9 @@ Global helper functions go here.
 
 
 def get_cartesian(r, theta):
+    """
+    Given a radius and theta, return the cartesian (x, y) coordinates.
+    """
     x = r*np.sin(theta)
     y = r*np.cos(theta)
 
@@ -343,6 +369,9 @@ def get_cartesian(r, theta):
 
 
 def correct_negative_angle(angle):
+    """
+    Corrects a negative angle to a positive one.
+    """
     if angle < 0:
         angle = 2 * np.pi + angle
     else:
