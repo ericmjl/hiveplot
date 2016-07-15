@@ -185,7 +185,7 @@ class HivePlot(object):
 
     def add_axes_and_nodes(self):
         """
-        Adds the axes (i.e. 2 or 3 axes, not to be confused with matplotlib 
+        Adds the axes (i.e. 2 or 3 axes, not to be confused with matplotlib
         axes) and the nodes that belong to each axis.
         """
         for i, (group, nodelist) in enumerate(self.nodes.items()):

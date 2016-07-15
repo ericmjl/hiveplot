@@ -1,13 +1,19 @@
 # hiveplot
+
 Hive Plots in using Python &amp; matplotlib!
 
 pypi page: https://pypi.python.org/pypi/hiveplot
 
-# How to install hiveplot
+## Badges
+
+- QuantifiedCode: [![Code Issues](https://www.quantifiedcode.com/api/v1/project/d5a88f4523c04e7294fc5dd58c1edee6/badge.svg)](https://www.quantifiedcode.com/app/project/d5a88f4523c04e7294fc5dd58c1edee6)
+- Travis CI: 
+
+## How to install hiveplot
 
 To install `hiveplot`, you need to have `matplotlib` installed - that's the only dependency required. If you are using `networkx` to create your graphs, you will need that as well.
 
-# How to use hiveplot
+## How to use hiveplot
 
 Hive Plots are used for visualizing large network data in a rational way. Hive Plots are non-trivial to create, but I have made this Python package to help boil it down to the essentials. 
 
@@ -63,7 +69,7 @@ Once all of this is setup, you can plot the Hive Plot!
 
 All contributions to improve the package are welcome!
 
-# Change Log
+## Change Log
 
 0.1.8.2:
 
