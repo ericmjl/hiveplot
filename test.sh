@@ -1,1 +1,1 @@
-py.test --cov
+py.test --cov --cov-report term-missing
