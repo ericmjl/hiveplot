@@ -6,8 +6,8 @@ pypi page: https://pypi.python.org/pypi/hiveplot
 
 ## Badges
 
-- QuantifiedCode: [![Code Issues](https://www.quantifiedcode.com/api/v1/project/d5a88f4523c04e7294fc5dd58c1edee6/badge.svg)](https://www.quantifiedcode.com/app/project/d5a88f4523c04e7294fc5dd58c1edee6)
-- Travis CI: [![Build Status](https://travis-ci.org/ericmjl/hiveplot.svg?branch=master)](https://travis-ci.org/ericmjl/hiveplot)
+- [![Code Issues](https://www.quantifiedcode.com/api/v1/project/d5a88f4523c04e7294fc5dd58c1edee6/badge.svg)](https://www.quantifiedcode.com/app/project/d5a88f4523c04e7294fc5dd58c1edee6) (QuantifiedCode)
+- [![Build Status](https://travis-ci.org/ericmjl/hiveplot.svg?branch=master)](https://travis-ci.org/ericmjl/hiveplot) (Travis CI)
 
 ## How to install hiveplot
 
