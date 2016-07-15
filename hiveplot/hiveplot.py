@@ -127,12 +127,12 @@ class HivePlot(object):
         """
         Computes the plot radius: maximum of length of each list of nodes.
         """
-        plot_R = 0
+        plot_rad = 0
         for group, nodelist in self.nodes.items():
             proposed_radius = len(nodelist) * self.scale
-            if proposed_radius > plot_R:
-                plot_R = proposed_radius
-        return plot_R + self.internal_radius
+            if proposed_radius > plot_rad:
+                plot_rad = proposed_radius
+        return plot_rad + self.internal_radius
 
     def axis_length(self, group):
         """
@@ -213,6 +213,9 @@ class HivePlot(object):
         return self.group_theta(group)
 
     def draw_edge(self, n1, n2, d, group):
+        """
+        Renders the given edge (n1, n2) to the plot.
+        """
         start_radius = self.node_radius(n1)
         start_theta = self.node_theta(n1)
 
@@ -309,14 +312,6 @@ class HivePlot(object):
 
         return start_angle, end_angle
 
-    def correct_negative_angle(self, angle):
-        if angle < 0:
-            angle = 2 * np.pi + angle
-        else:
-            pass
-
-        return angle
-
     def correct_angles(self, start_angle, end_angle):
         """
         This function corrects for the following problems in the edges:
@@ -336,7 +331,7 @@ class HivePlot(object):
 
 
 """
-Global helper functions go here
+Global helper functions go here.
 """
 
 
@@ -345,3 +340,12 @@ def get_cartesian(r, theta):
     y = r*np.cos(theta)
 
     return x, y
+
+
+def correct_negative_angle(angle):
+    if angle < 0:
+        angle = 2 * np.pi + angle
+    else:
+        pass
+
+    return angle
