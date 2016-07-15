@@ -31,3 +31,6 @@ script:
   - pycodestyle .
   - py.test
   - pip uninstall -y hiveplot
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
