@@ -1,4 +1,4 @@
-name: build
+name: hiveplot
 dependencies:
 - matplotlib
 - mkl
