@@ -1,3 +1,6 @@
+# Custom stuff
+hiveplot/bin/*
+
 # Python stuff
 *.egg-info
 build/*
