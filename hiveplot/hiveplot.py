@@ -303,35 +303,35 @@ class HivePlot(object):
 
         if start_group == 0 and end_group == len(self.nodes.keys())-1:
             if self.has_edge_within_group(start_group):
-                start_angle = self.correct_negative_angle(start_angle -
-                                                          self.minor_angle)
+                start_angle = correct_negative_angle(start_angle -
+                                                     self.minor_angle)
             if self.has_edge_within_group(end_group):
-                end_angle = self.correct_negative_angle(end_angle +
-                                                        self.minor_angle)
+                end_angle = correct_negative_angle(end_angle +
+                                                   self.minor_angle)
 
         elif start_group == len(self.nodes.keys())-1 and end_group == 0:
             if self.has_edge_within_group(start_group):
-                start_angle = self.correct_negative_angle(start_angle +
-                                                          self.minor_angle)
+                start_angle = correct_negative_angle(start_angle +
+                                                     self.minor_angle)
             if self.has_edge_within_group(end_group):
-                end_angle = self.correct_negative_angle(end_angle -
-                                                        self.minor_angle)
+                end_angle = correct_negative_angle(end_angle -
+                                                   self.minor_angle)
 
         elif start_group < end_group:
             if self.has_edge_within_group(end_group):
-                end_angle = self.correct_negative_angle(end_angle -
-                                                        self.minor_angle)
+                end_angle = correct_negative_angle(end_angle -
+                                                   self.minor_angle)
             if self.has_edge_within_group(start_group):
-                start_angle = self.correct_negative_angle(start_angle +
-                                                          self.minor_angle)
+                start_angle = correct_negative_angle(start_angle +
+                                                     self.minor_angle)
 
         elif end_group < start_group:
             if self.has_edge_within_group(start_group):
-                start_angle = self.correct_negative_angle(start_angle -
-                                                          self.minor_angle)
+                start_angle = correct_negative_angle(start_angle -
+                                                     self.minor_angle)
             if self.has_edge_within_group(end_group):
-                end_angle = self.correct_negative_angle(end_angle +
-                                                        self.minor_angle)
+                end_angle = correct_negative_angle(end_angle +
+                                                   self.minor_angle)
 
         return start_angle, end_angle
 
