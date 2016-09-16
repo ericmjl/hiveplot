@@ -13,9 +13,11 @@ pypi page: https://pypi.python.org/pypi/hiveplot
 
 To install `hiveplot`, you need to have `matplotlib` installed - that's the only dependency required. If you are using `networkx` to create your graphs, you will need that as well.
 
+To run one of the notebook examples, you may need to install the [Protein Interaction Network](https://github.com/ericmjl/protein-interaction-network) package from GitHub.
+
 ## How to use hiveplot
 
-Hive Plots are used for visualizing large network data in a rational way. Hive Plots are non-trivial to create, but I have made this Python package to help boil it down to the essentials. 
+Hive Plots are used for visualizing large network data in a rational way. Hive Plots are non-trivial to create, but I have made this Python package to help boil it down to the essentials.
 
 The original creator of Hive Plots is Martin Krzywinski of the BCGSC. His website is at: http://mkweb.bcgsc.ca
 
@@ -38,19 +40,19 @@ You may wish to sort your nodes by some criteria.
     for group, nodelist in nodes.items():
         nodes[group] = sorted(nodelist, key=keyfunc())
         ...
-        
+
 Note: `keyfunc()` might work on the node attributes `d`. That is why we included the `d` dictionary of attributes inside.
 
 Finally, you will need to get just the node ids out.
 
         nodes[group] = [n for n, d in nodes[group]]
-        
+
 Next, you will need to group your edges. Do this in a similar fashion as nodes.
 
     edges = dict()
     edges['group1'] = [(u,v,d) for u,v,d in G.edges(data=True) if d == some_criteria()]
     ...
-    
+
 Finally, you will need a color map for the nodes and edges respectively.
 
     nodes_cmap = dict()
@@ -61,7 +63,7 @@ Finally, you will need a color map for the nodes and edges respectively.
 	edges_cmap = dict()
 	edges_cmap['group1'] = 'green'
 	...
-    
+
 Once all of this is setup, you can plot the Hive Plot!
 
     h = HivePlot(nodes, edges, nodes_camp, edges_cmap)
@@ -77,7 +79,7 @@ All contributions to improve the package are welcome!
 
 0.1.7.4:
 
-1. Fixed a bug that would cause drawing to not work on Python 3 `dict_key` objects do not have a `.index(item)` the way `lists` have. 
+1. Fixed a bug that would cause drawing to not work on Python 3 `dict_key` objects do not have a `.index(item)` the way `lists` have.
 
 0.1.7.1:
 
