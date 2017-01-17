@@ -1,2 +1,2 @@
-matplotlib==1.5.3
+matplotlib==2.0.0
 pycodestyle==2.2.0
