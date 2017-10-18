@@ -9,7 +9,7 @@ print(reqs)
 packages = ['hiveplot']
 
 setup(name='hiveplot',
-      version='2017.10.17',
+      version='2017.10.17-b',
       author='Eric J. Ma',
       author_email='ericmajinglong@gmail.com',
       description=("Hive plots in Python!"),
