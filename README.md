@@ -21,7 +21,7 @@ Hive Plots are used for visualizing large network data in a rational way. Hive P
 
 The original creator of Hive Plots is Martin Krzywinski of the BCGSC. His website is at: http://mkweb.bcgsc.ca
 
-An example graph is available in the `test` folder. Alternatively, you can view the IPython notebook online: http://nbviewer.ipython.org/github/ericmjl/hiveplot/blob/master/test/Tests.ipynb
+An example graph is available in the `test` folder. Alternatively, you can view the IPython notebook online: http://nbviewer.ipython.org/github/ericmjl/hiveplot/blob/master/test/test_data/Tests.ipynb
 
 To start, I assume that you have some network data. In your network data, you will have nodes and edges.
 
